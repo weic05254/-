@@ -1,0 +1,43 @@
+{% extends 'Nav.html' %}
+
+{% block content %}
+    <script>
+        function removeHWID(hwid) {
+            fetch(`/activate?hwid=${hwid}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    location.reload(); // 刪除後reload page
+                } else {
+                    alert('移除該序號失敗');
+                }
+            });
+        }
+    </script>
+
+    <div class="mt-4 p-5 rounded text-center col-12 col-xl-6 col-md-12 col-sm-12 mx-auto">
+        <div class="container">
+            <h1>啟用軟體</h1><br>
+            <form action="/activate" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" id="hwid" name="hwid" class="form-control" placeholder="請輸入序號">
+                    <button type="submit" class="btn btn-outline-secondary">啟用</button>
+                </div>
+            </form>
+            <div class="row mx-auto text-start jumbotron p-4 border-top">
+                <h4>已啟用的序號：</h4>
+                <div class="table-responsive">
+                    <ul>
+                        {% for hwid in hwids %}<br>
+                        <li>
+                            {{ hwid[0] }}
+                            <button  class="btn btn-dark btn-outline-light btn-sm rounded-pill border" onclick="removeHWID('{{ hwid[0] }}')">移除</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

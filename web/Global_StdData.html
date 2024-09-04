@@ -1,0 +1,47 @@
+{% extends 'Nav.html' %}
+
+{% block content %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+  <div class="container mt-3">  
+    <h2>龍華科技大學各科系通過率</h2>
+    <p>提供學生查看各科目的通過率</p>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>課號</th>
+            <th>課程名稱</th>
+            <th>平均分數</th>
+            <th>通過率</th>
+            <th>不通過率</th>
+            <th>壓線通過率(目前範圍:60~70</th>
+            <th>資料總數</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in data %}
+          <tr>
+            <td>{{ item['ClassID'] }}</td>
+            <td>{{ item['ClassName'] }}</td>
+            <td>{{ "%0.2f"|format(item['Score_AVG']) }}</td>
+            <td>{{ "%0.1f%%"|format(item['PassRate']) }}</td>
+            <td>{{ "%0.1f%%"|format(item['UnPassRate']) }}</td>
+            <td>{{ "%0.1f%%"|format(item['BorderlinePassRate']) }}</td>
+            <td>{{ item['ScoreList_Len'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>備註</td>
+            <td colspan="6">123</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

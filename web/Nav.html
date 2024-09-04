@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet" href="static\css\bootstrap.css">
+    </head>
+    <style>
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,"Microsoft JhengHei UI","Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        body::before {
+            display: block;
+            content: '';
+            height: 60px;
+        }
+        h1,h2,h3,h4,h5,h6{
+            font-weight: bold;
+        }
+
+        .bg-cover{
+            background-size: cover;
+            background-position: center center;
+        }
+
+        @media (min-width: 768px) { 
+            .text-md-dark{
+                color: #333;
+            }
+        }
+    </style>
+    <body>
+
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">NT</a>
+            
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>    
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                畢業門檻
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="https://www.lhu.edu.tw/oapx/lhuplan/Subject/ASubject_Qry.htm">學分配當表</a></li>
+                                <li><a class="dropdown-item" href="https://www.lhu.edu.tw/osa/health_labor.htm">勞作教育</a></li>
+                                <li><a class="dropdown-item" href="https://www.lhu.edu.tw/service_learning/ex1.htm">服務學習</a></li>
+                                <li><a class="dropdown-item" href="https://im.lhu.edu.tw/p/405-1010-6850,c831.php?Lang=zh-tw">非正式課程</a></li>
+                                <li><a class="dropdown-item" href="https://im.lhu.edu.tw/p/412-1010-950.php?Lang=zh-tw">專業證照</a></li>
+                                <li><a class="dropdown-item" href="https://lc.lhu.edu.tw/p/405-1023-8322,c934.php?Lang=zh-tw">語言證照</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="ChangeLog" class="nav-link">更新日誌</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="QA" class="nav-link">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="ContactUs" class="nav-link">聯絡我們</a>
+                        </li>
+
+						{% if g.UserName %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                歡迎 {{ g.UserName }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+								<li><a class="dropdown-item" href="Global_StdData" class="nav-link">通過率</a></li>
+								<li><a class="dropdown-item" href="activate">啟用序號</a></li>
+                                {% if g.UserPermissionLevel == 1 %}
+								<li><a class="dropdown-item" href="/Dev_DBMgr/index">資料庫編輯器</a></li>
+								<li><a class="dropdown-item" href="/Dev_FeedBack">檢視反饋紀錄</a></li>
+                                {% endif %}
+								<li><a class="dropdown-item" href="Logout">登出</a></li>
+
+                            </ul>
+                        </li>
+						{% else %}
+						<li class="nav-item">
+							<a href="Login" class="nav-link">登入</a>
+						</li>
+						{% endif %}
+						
+						
+                        
+                    </ul>
+                    {% if g.UserName %}
+					<a href="Shop" class="btn btn-outline-light btn-lg rounded-pill fs-6 fw-bold">購買產品</a>
+                    {% else %}
+                    <a onclick="flashMessage('請先登入')" href="Shop" class="btn btn-outline-light btn-lg rounded-pill fs-6 fw-bold">購買產品</a>
+                    {% endif %}
+                </div>                
+            </div>            
+        </nav>
+
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="p-4 border-top">
+            <div class="container align-items-center justify-content-between d-flex">
+                <p class="mb-0 text-muted">
+                    &copy;2024 TW.
+                </p>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-muted">關於我們</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-muted">關於NT</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+
+        <script src="static\js\bootstrap.js"></script>
+		<script>
+		function openNewPage() {
+			window.open('https://drive.google.com/file/d/1fohevCqa5lLqWAoLsNIvW7JbHRdnf-GC/view?usp=drive_link', '_blank');
+		}
+        function flashMessage(msg) {
+            alert(msg);
+        }
+		</script>
+		
+    </body>
+</html>
+
+

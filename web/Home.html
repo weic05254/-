@@ -1,0 +1,114 @@
+{% extends 'Nav.html' %}
+{% block title %}
+    首頁
+{% endblock %}
+{% block content %}
+<section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <div>
+                <h1>畢業門檻<span class="text-warning">查詢軟體 </span></h1>
+                <p class="lead my-4">
+                    只需要輸入校往帳號密碼，就能夠協助學生計算他們目前所擁有的學分數和尚需取得的學分數的工具。
+                    並且可以幫助學生輕鬆地計算他們的學分進度，並確定他們甚麼時候可以畢業。 
+                </p>
+                    <button 
+                        class="btn btn-primary btn-lg"
+                        data-bs-toggle="modal"
+                        data-bs-target="#enroll" 
+                        onclick="openNewPage()">
+                        免費試用
+                    </button>
+            </div>
+            <img
+                class="img-fluid w-50 d-none d-sm-block"
+                src="static/image/1.png"
+                alt=""
+                />
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    <div class="row align-items-center justify-content-around">
+        <img src="static\image\main.png" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+        <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+            <h2>涵蓋所有的畢業門檻</h2><br/>
+            <p>有畢業門檻總覽、學分統計、證照查詢、勞作教育、服務學習和缺曠課狀態等等的畢業門檻條件，以供學生們參考。</p>
+        </div>
+    </div>
+</div>
+<br/><br/>
+<div class="jumbotron bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="row"></div>
+            <div class="row align-items-center justify-content-around">
+                <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+                    <h2>畢業門檻總攬</h2><br/>
+                    <p>進入功能後點選畢業門檻狀態總攬，可一次列出各項畢業門檻的通過狀態，並將未通過的項目提供快捷入口查詢詳細資訊。</p>
+                </div>
+                <img src="static\image\總攬.png" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row"></div>
+        <div class="row align-items-center justify-content-around">
+            <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+                <h2>學分統計</h2><br/>
+                <p>進入功能後點選學分統計，可從課程配當表即時提取科目名稱及分類後，再提取學生歷年成績進行分類與計算。
+                    最終列出以下五大類型學分的完成進度，以及該學生是否均已達標(以110年資管系為例)，同時列出學生目前已修科目的學分佔比，通過狀態，成績及類別。
+                </p>
+            </div>
+            <img src="static\image\學分.jpg" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="row"></div>
+            <div class="row align-items-center justify-content-around">
+                <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+                    <h2>報名服務學習</h2><br/>
+                    <p>進入功能後點選服務學習查詢，可列出該服務學習時數、演講及心得完成進度，並提供即時查詢，且若未完成服務學習，可直接報名當前學校開設的服務學習活動，並附帶校網沒提供的篩選器，分類中午、下午，篩除出已滿的活動，更方便查詢。
+                    </p>
+                </div>
+                <img src="static\image\服務.jpg" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row"></div>
+        <div class="row align-items-center justify-content-around">
+            <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+                <h2>預定勞作教育</h2><br/>
+                <p>供學生預定勞作教育，以防學生忘記登記勞作教育。
+                </p>
+            </div>
+            <img src="static\image\勞作預定.jpg" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="row"></div>
+            <div class="row align-items-center justify-content-around">
+                <div class="text-break col-12 col-xl-6 col-md-12 col-sm-12">
+                    <h2>缺曠</h2><br/>
+                    <p>進入功能後點選課程預警，可直接列出該學生當前學期各項科目的課程預警、缺曠課節數、授課教師以及科目名稱，若曠課過多會跳出警示。
+                    </p>
+                </div>
+                <img src="static\image\缺況.jpg" class="img-fluid col col-xl-6 col-md-12 col-sm-12 p-5" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

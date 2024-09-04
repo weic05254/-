@@ -1,0 +1,164 @@
+ * {
+     box-sizing: border-box;
+ }
+
+ .nav-item .btn {
+     border-width: 2px;
+ }
+
+ .nav-item .form-control {
+     border-width: 2px;
+ }
+
+ .cart {
+     background-color: transparent;
+     position: relative;
+     width: 100%;
+     font-size: 25px;
+ }
+
+ .cart .badge {
+     position: absolute;
+     width: 20px;
+     top: 8px;
+     right: 1px;
+     padding: 0;
+ }
+
+ .table th,
+ .table td {
+     border: 0;
+ }
+
+ /*  items*/
+
+ #items .items-text {
+     text-align: center;
+     font-size: 12px;
+     color: #706e6c;
+     font-family: "Verdana", "·s²Ó©úÅé", Geneva, Tahoma, sans-serif;
+ }
+
+ #items .card-body {
+     padding: 0;
+ }
+
+ #items .card-footer {
+     background-color: transparent;
+ }
+
+
+ /*footer*/
+
+ footer li {
+     float: right;
+
+ }
+
+ footer a {
+     display: block;
+     color: black;
+ }
+
+ footer .fa {
+     font-size: 35px;
+
+ }
+
+ footer ol {
+     list-style: none;
+ }
+
+ /*item-detail*/
+
+ #item-detail .detail-color {
+     color: #666;
+ }
+#item-detail .badge{
+    font-size: 16px;
+}
+
+#items-notice a{
+    animation: colorchange 5s linear 2s infinite ;
+}
+button a:hover{
+    text-decoration: none;
+}
+ @keyframes colorchange {
+     0% {
+         background-color: #0062cc;
+     }
+     50% {
+         background-color: #2d89ed;
+     }
+     100% {
+         background-color: #0062cc;
+     }
+ }
+#items-size input[type=radio]{
+  display:none;
+}
+/*items-evaluation*/
+#items-evaluation .fa{
+    color: #83521e;
+}
+
+#items-cart .custom-select-lg{
+    height: 0%;
+}
+#items-cart .cart-color{
+    background-color: #83521e;
+    color: #fff;
+    transition:background-color 0.5s;
+}
+#items-cart .cart-color:hover{
+    background-color: #573b1f;
+}
+ /*RWD*/
+
+ @media screen and (min-width:992px) {
+
+     header img {
+         height: 350px;
+     }
+     #list-toggler a {
+         border: 1px solid #ffc107;
+         color: #ffc107;
+         border-radius: 10%;
+         margin-left: 5px;
+         margin-right: 5px;
+         font-size: 18px;
+     }
+ }
+
+ @media screen and (max-width:900px) {
+
+     .cart .badge {
+         display: none;
+     }
+
+     #header {
+         padding: 0;
+     }
+
+     header img {
+         max-height: 200px;
+     }
+     /*    list-toggler        */
+     #list-toggler a {
+         width: 100%;
+         border: 1px solid #ffc107;
+         color: #ffc107;
+         border-radius: 10%;
+         margin-left: 5px;
+         margin-right: 5px;
+         font-size: 30px;
+     }
+     /*            */
+     #item-detail h1 {
+         font-size: 26px;
+     }
+     #item-price {
+         font-size: 20px
+     }
+ }

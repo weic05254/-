@@ -1,0 +1,133 @@
+{% extends 'Nav.html' %}
+
+{% block content %}
+<style>
+    iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    }
+</style>
+<div class="p-5 text-center mx-auto">
+    <div class="container">
+        <h1 class="fw-bold">聯絡我們</h1>
+        <p class="lead my-4">
+            如有任何的問題, 歡迎使用EMAIL&致電給我們，或是填寫的下方表單。
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-12 col-xl-6 col-md-12 col-sm-12 mx-auto">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.4699628530066!2d121.40100242689596!3d25.018120388928068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34681d79decbf427%3A0x4d6df48c8f1bd30f!2z6b6N6I-v56eR5oqA5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1714226132851!5m2!1szh-TW!2stw" width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <br><br>
+            <h3 class="fw-bold">電子郵件</h3>
+            <p>D1104241XXX@gm.lhu.edu.tw</p>
+            <hr />
+            <h3 class="fw-bold">電話</h3>
+            <p>0912345678</p>
+            <button type="button" class="btn btn-secondary btn-lg rounded-pill fs-6 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                意見回饋
+            </button>
+        </div>
+    </div>
+</div><br><br>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">意見回饋</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="OpenModal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" novalidate>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">姓名：</label>
+                        <input type="text" class="form-control" id="recipient-name" name="Name" required>
+                        <div class="invalid-feedback">請輸入您的姓名。</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email：</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" name="Email" placeholder="name@example.com" required>
+                        <div class="invalid-feedback">請輸入有效的電子郵件地址。</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">請敘述您遇到的問題：</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="IssueDesc" rows="3" required></textarea>
+                        <div class="invalid-feedback">請描述您遇到的問題。</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary" id="submitFeedback">送出</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">提交成功</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>感謝您的意見反饋！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // 當模態框關閉時移除背景(修復提交後無法控制的BUG)
+    $('#successModal').on('hidden.bs.modal', function (e) {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
+
+
+    // Form Post
+    $(document).ready(function () {
+        $('#submitFeedback').on('click', function () {
+            var form = $('#feedbackForm')[0];
+
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+                return;
+            }
+
+            var formData = {
+                Name: $('#recipient-name').val(),
+                Email: $('#exampleFormControlInput1').val(),
+                IssueDesc: $('#exampleFormControlTextarea1').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ContactUs',
+                data: formData,
+                success: function (response) {
+                    if (response === 'success') {
+                        $('#exampleModal').modal('hide');
+                        $('#successModal').modal('show');
+
+                        for (var i = 0; i < 5; i++) {
+                        var sheep = new eSheep({allowPets:"all", allowPopup:"no"}); 
+                        sheep.Start(); 
+                        }
+                    }
+                },
+                error: function () {
+                    alert('提交失敗，請稍後再試。');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

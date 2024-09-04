@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>結帳區</title>
+    <link rel="stylesheet" href="static\Shop\boostrap-shop-item.css">
+    <link rel="stylesheet" href="static\Shop\bootstrap.min.css">
+    <link rel="stylesheet" href="static\Shop\font-awesome.min.css">
+    <link rel="stylesheet" href="static\Shop\bootstrap-shop-product.css">
+    <script src="static\Shop\jquery-3.2.1.slim.min.js" ></script>
+    <script src="static\Shop\popper.min.js" ></script>
+    <script src="static\Shop\bootstrap.min.js"></script>
+
+    <script src="static\Shop\jQuery.3.5.1.js"></script>
+    <script src="static\Shop\banks.js"></script>
+    <script src="static\Shop\branches.js"></script>
+</head>
+
+<body>
+    <div class="container" id="product-title">
+        <div class="row" id="titlebar">
+            <div class="col-md-12 mt-4 mb-3 text-center text-secondary">
+                <h1 class="display-5"><strong>結帳區</strong></h1>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-between mb-3">
+
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert text-secondary text-center alert-radius" role="alert">
+                    1. 輸入訂單資料
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert alert-warning text-secondary border border-warning text-center alert-radius" role="alert">
+                    2. 金流付款確認
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert text-secondary text-center alert-radius" role="alert">
+                    3. 成功完成訂單
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-xl-8 col-sm-12 m-auto">
+                <div class="alert alert-secondary text-center " role="alert">
+                    <strong>選擇付款方式</strong>
+                </div>
+                <div class="card-body bg-light text-dark">
+                    <form method="POST" action="" id="ShopMid" novalidate>
+                        <div class="form-item">
+                            <label for="bank_name" id="" class="">銀行名稱</label>
+                            <select name="bank" id="bank" class="form-control" required>
+                                <option value="bank" selected>請選擇總行</option>
+                            </select>
+                        </div>
+            
+                        <div class="form-item">
+                            <label for="branch_name" id="" class="">分行名稱</label>
+                            <select name="branch" id="branch" class="form-control" required>
+                                <option value="branch" selected>請選擇分行</option>
+                            </select>
+                        </div>
+            
+                        <div class="form-item">
+                            <label for="account_number" id="" class="">帳戶號碼</label>
+                                <input id="account_number" type="text" class="form-control" name="account_number" value="" autofocus required>
+                            <div id="account_numberInfo"></div>
+                        </div>
+            
+                        <div class="form-item">
+                            <label for="account_name" id="" class="">帳戶名稱</label>
+                                <input id="account_name" type="text" class="form-control" name="account_name" value="" autofocus required>
+                            <div id="account_nameInfo"></div>
+                        </div>            
+                    </form>            
+                </div><br>
+                <div class="form-row">
+                    <div class="form-gruop col-12 text-right">
+                        <button type="submit" class="btn btn-secondary mr-1 mb-5" id="keeybuy-btn"><a href="Shop" class="text-white border-bottom-0">回到上頁</a></button>
+                        <button type="submit" class="btn btn-primary mb-5" id="pay-btn"><a href="ShopFinal" class="text-white">完成付款</a></button>
+                    </div>
+                </div>
+                <script>
+                    // Form 檢測
+                    $(document).ready(function () {
+                        $('#pay-btn').on('click', function () {
+                            var form = $('#ShopMid')[0];
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                form.classList.add('was-validated');
+                                return;
+                            }
+                        });
+                    });
+                </script>
+                <script type="text/javascript">
+            
+                    banksJson.forEach(function (banksJson, index) {
+                        $("#bank").append(`<option value="${banksJson.head_code}">${banksJson.bank_name}</option>`);
+                    })
+            
+                    $("#bank").on("change", function () {
+                        var code = this.value;
+                        var newBranchesJson = [];
+            
+                        for (var i = 0; i < branchesJson.length; i++) {
+                            if (branchesJson[i].head_code == code) {
+                                newBranchesJson.push(branchesJson[i]);
+                            }
+                        }
+                        $("#branch").html('');
+                        newBranchesJson.forEach(function (newBranchesJson, index) {
+                            $("#branch").append(`<option value="${newBranchesJson.branch_code}">${newBranchesJson.branch_name}</option>`);
+                        })
+                    })
+                    // 帳戶號碼 輸入驗證  規則 = /^[0-9\s]*$/  僅限輸入 阿拉伯數字
+                        $("#account_number").on('focus', function() {
+                            $("#account_numberInfo").removeClass("alert-warning alert-ok").hide();
+                        })
+                        $("#account_number").on('blur', function() {
+                            var account_number = this.value;
+                            var reg = /^[0-9\s]*$/;
+                            if(account_number !== '') {
+                                if(!reg.test(account_number)) {
+                                    $("#account_numberInfo").addClass("alert-warning").show().html("格式是 僅限輸入 阿拉伯數字&nbsp;才能通過");
+                                    return;
+                                }
+                            }
+                        })
+                    
+                    // 帳戶名稱驗證  規則 = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/ (只允許 中、英文、数字、下划线 且不能有空白)
+                        $("#account_name").on("focus", function() {
+                            $("#account_nameInfo").removeClass("alert-warning").hide();
+                        })
+                        $("#account_name").on('input', function() {
+                            $("#account_nameInfo").removeClass("alert-warning").hide();
+                            var account_name = this.value;
+                            var reg = /^[\u4E00-\u9FA5A-Za-z0-9_]+$/;
+                            if(account_name !== '') {                    
+                                if(!reg.test(account_name)) {
+                                    $("#account_nameInfo").addClass("alert-warning").show().html("僅：中、英文、数字、下划线 且不能有空白");
+                                    return;
+                                }
+                            }
+                        })
+                </script>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>

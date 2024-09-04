@@ -1,0 +1,12 @@
+{% extends 'Nav.html' %}
+
+{% block content %}
+    <h1>登入h1</h1>
+    <form method="post">
+        <label for="username">UserID:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

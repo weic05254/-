@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>結帳區</title>
+    <link rel="stylesheet" href="static\Shop\boostrap-shop-item.css">
+    <link rel="stylesheet" href="static\Shop\bootstrap.min.css">
+    <link rel="stylesheet" href="static\Shop\font-awesome.min.css">
+    <link rel="stylesheet" href="static\Shop\bootstrap-shop-product.css">
+    <script src="static\Shop\jquery-3.2.1.slim.min.js" ></script>
+    <script src="static\Shop\popper.min.js" ></script>
+    <script src="static\Shop\bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container" id="product-title">
+        <div class="row" id="titlebar">
+            <div class="col-md-12 mt-4 mb-3 text-center text-secondary">
+                <h1 class="display-5">結帳區</h1>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-between mb-3">
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert text-secondary text-center alert-radius" role="alert">
+                    1. 輸入訂單資料
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert text-secondary text-center alert-radius" role="alert">
+                    2. 金流付款確認
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-xl-4 col-sm-12 mx-auto">
+                <div class="alert alert-warning border border-warning text-secondary text-center alert-radius" role="alert">
+                    3. 成功完成訂單
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-12 m-auto p-3 mb-2">
+                <div class="card border-0">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table table-hover table-sm">
+                                <h1 class="text-center">購買完成後，請回到首頁啟用軟體。</h1>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 mb-4">
+            <div class="m-auto col-md-8 col-12">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 m-auto">
+                <form class="needs-validation" novalidate="">
+                    <div class="form-row">                        
+                        <div class="form-gruop col-12 text-right">
+                            <button type="submit" class="btn btn-primary mb-5" id="pay-btn"><a href="/" class="text-white">回到首頁</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--    表單驗證 script-->
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+
+</body></html>
